@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -20,7 +20,7 @@ public class WordFrequencyGame {
                 inputList.add(input);
             }
             //get the map for the next step of sizing the same word
-            Map<String, List<Input>> map = getListMap(inputList);
+            Map<String, List<Input>> map = inputList.stream().collect(Collectors.groupingBy(Input::getValue));
             List<Input> list = new ArrayList<>();
             for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
                 Input input = new Input(entry.getKey(), entry.getValue().size());
@@ -37,21 +37,5 @@ public class WordFrequencyGame {
         } catch (Exception e) {
             return "Calculate Error";
         }
-    }
-
-
-    private Map<String, List<Input>> getListMap(List<Input> inputList) {
-        Map<String, List<Input>> map = new HashMap<>();
-        for (Input input : inputList) {
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(input.getValue())) {
-                ArrayList arr = new ArrayList<>();
-                arr.add(input);
-                map.put(input.getValue(), arr);
-            } else {
-                map.get(input.getValue()).add(input);
-            }
-        }
-        return map;
     }
 }
