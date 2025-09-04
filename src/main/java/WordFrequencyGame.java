@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WordFrequencyGame {
 
@@ -14,11 +15,11 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         }
         try {
-            Map<String, Long> map = List.of(words).stream()
+            Map<String, Long> word2Count = Stream.of(words)
                     .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
             List<Input> list = new ArrayList<>();
-            for (Map.Entry<String, Long> entry : map.entrySet()) {
+            for (Map.Entry<String, Long> entry : word2Count.entrySet()) {
                 Input input = new Input(entry.getKey(), entry.getValue().intValue());
                 list.add(input);
             }
