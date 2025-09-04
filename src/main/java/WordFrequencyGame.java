@@ -27,8 +27,7 @@ public class WordFrequencyGame {
 
             list.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
-            StringJoiner joiner = composeOutput(list);
-            return joiner.toString();
+            return  composeOutput(list).toString();
         } catch (Exception e) {
             return "Calculate Error";
         }
@@ -36,10 +35,7 @@ public class WordFrequencyGame {
 
     private static StringJoiner composeOutput(List<Input> list) {
         StringJoiner joiner = new StringJoiner("\n");
-        for (Input w : list) {
-            String s = w.getValue() + " " + w.getWordCount();
-            joiner.add(s);
-        }
+        list.forEach(w -> joiner.add(w.getValue() + " " + w.getWordCount()));
         return joiner;
     }
 }
