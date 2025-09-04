@@ -13,19 +13,15 @@ public class WordFrequencyGame {
         if (words.length == 1) {
             return inputStr + " 1";
         }
-        try {
-            Map<String, Long> word2Count = Stream.of(words)
-                    .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+        Map<String, Long> word2Count = Stream.of(words)
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
-            List<Input> list = word2Count.entrySet().stream()
-                    .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
-                    .sorted((w1, w2) -> w2.getWordCount() - w1.getWordCount())
-                    .toList();
+        List<Input> list = word2Count.entrySet().stream()
+                .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
+                .sorted((w1, w2) -> w2.getWordCount() - w1.getWordCount())
+                .toList();
 
-            return composeOutput(list).toString();
-        } catch (Exception e) {
-            return "Calculate Error";
-        }
+        return composeOutput(list).toString();
     }
 
     private static StringJoiner composeOutput(List<Input> list) {
