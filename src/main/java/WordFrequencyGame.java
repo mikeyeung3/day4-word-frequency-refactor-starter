@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -18,13 +17,10 @@ public class WordFrequencyGame {
             Map<String, Long> word2Count = Stream.of(words)
                     .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
-            List<Input> list = new ArrayList<>();
-            for (Map.Entry<String, Long> entry : word2Count.entrySet()) {
-                Input input = new Input(entry.getKey(), entry.getValue().intValue());
-                list.add(input);
-            }
-
-            list.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+            List<Input> list = word2Count.entrySet().stream()
+                    .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
+                    .sorted((w1, w2) -> w2.getWordCount() - w1.getWordCount())
+                    .toList();
 
             return composeOutput(list).toString();
         } catch (Exception e) {
