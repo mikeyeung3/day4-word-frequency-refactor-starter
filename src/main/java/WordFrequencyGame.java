@@ -18,7 +18,7 @@ public class WordFrequencyGame {
 
         List<Input> list = word2Count.entrySet().stream()
                 .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
-                .sorted((w1, w2) -> w2.getWordCount() - w1.getWordCount())
+                .sorted((w1, w2) -> w2.count() - w1.count())
                 .toList();
 
         return composeOutput(list).toString();
@@ -26,7 +26,7 @@ public class WordFrequencyGame {
 
     private static StringJoiner composeOutput(List<Input> list) {
         StringJoiner joiner = new StringJoiner("\n");
-        list.forEach(w -> joiner.add(w.getValue() + " " + w.getWordCount()));
+        list.forEach(w -> joiner.add(w.value() + " " + w.count()));
         return joiner;
     }
 }
