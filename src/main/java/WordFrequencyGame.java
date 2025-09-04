@@ -14,10 +14,8 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         }
         try {
-            List<String> inputList = List.of(words);
-
-            Map<String, Long> map = inputList.stream()
-                .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+            Map<String, Long> map = List.of(words).stream()
+                    .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
             List<Input> list = new ArrayList<>();
             for (Map.Entry<String, Long> entry : map.entrySet()) {
@@ -27,7 +25,7 @@ public class WordFrequencyGame {
 
             list.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
-            return  composeOutput(list).toString();
+            return composeOutput(list).toString();
         } catch (Exception e) {
             return "Calculate Error";
         }
