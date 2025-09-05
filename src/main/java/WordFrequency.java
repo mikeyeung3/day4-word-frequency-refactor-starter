@@ -1,1 +1,1 @@
-public record WordFrequency(String value, int count) {}
+public record WordFrequency(String word, int count) {}
